@@ -1,0 +1,58 @@
+{
+  "name": "skylark-browser-builder",
+  "version": "0.9.0",
+  "description": "The desktop browser for skylark applicaton",
+  "scripts": {
+    "packager": "electron-packager .  --out=dist --icon=./logo.png --ignore=dist --ignore=assets --ignore=builder.json --ignore=bower.json --ignore=README.md --ignore=.gitignore --ignore=sampleApps",
+    "dev": "electron . --enable-logging",
+    "clean": "del ../dist",
+    "clean:osx": "del ../dist/osx",
+    "clean:win": "del ../dist/win",
+    "pack": "npm run pack:osx && npm run pack:win",
+    "pack:osx": "electron-packager ../ \"skylarker\" --out=../dist/osx --platform=darwin --arch=x64  --icon=assets/osx/logo.png --ignore=dist --ignore=assets --ignore=build =README.md --ignore=.gitignore --ignore=samples",
+    "pack:win": "electron-packager ../ \"skylarker\" --out=../dist/win --platform=win32 --arch=ia32  --icon=assets/win/logo.png --ignore=dist --ignore=assets --ignore=build =README.md --ignore=.gitignore --ignore=samples",
+    "build": "npm run build:osx && npm run build:win",
+    "build:osx": "npm run pack:osx && electron-builder \"dist/osx/skylarker-darwin-x64/skylarker.app\" --platform=osx --out=\"installer/osx\" ",
+    "build:win": "npm run pack:win && electron-builder \"dist/win/skylarker-win32-ia32\" --platform=win  --dir=false "
+  },
+
+  "build": {
+    "appId": "skylarker",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+    }
+  },  
+  "repository": "https://github.com/skylarkjs/skylark-brower.git",
+  "keywords": [
+    "skylarker",
+    "desktop"
+  ],
+  "author": "hudaokeji",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.7.6",
+    "electron-packager": "^9.0.1"
+  },
+  "dependencies": {
+    "asar": "^0.13.0"
+  }
+}
