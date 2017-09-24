@@ -16,7 +16,7 @@ require.config({
  
 require([
   "skylarkjs",
-  "text!./skylark-config.json",
+  "text!./slax-config.json",
   "skylark-utils"
 ], function (skylark,txtConfig) {
   var config = JSON.parse(txtConfig);
