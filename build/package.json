@@ -9,11 +9,11 @@
     "clean:osx": "del ../dist/osx",
     "clean:win": "del ../dist/win",
     "pack": "npm run pack:osx && npm run pack:win",
-    "pack:osx": "electron-packager ../ \"skylarker\" --out=../dist/osx --platform=darwin --arch=x64  --icon=assets/osx/logo.png --ignore=dist --ignore=assets --ignore=build =README.md --ignore=.gitignore --ignore=samples",
-    "pack:win": "electron-packager ../ \"skylarker\" --out=../dist/win --platform=win32 --arch=ia32  --icon=assets/win/logo.png --ignore=dist --ignore=assets --ignore=build =README.md --ignore=.gitignore --ignore=samples",
+    "pack:osx": "electron-packager ../skylarker \"skylarker\" --overwrite --out=../dist/osx --platform=darwin --arch=x64  --icon=assets/osx/logo.png --ignore=dist --ignore=assets --ignore=build --ignore=bin --ignore=README.md --ignore=.gitignore --ignore=samples",
+    "pack:win": "electron-packager ../skylarker \"skylarker\" --overwrite --out=../dist/win --platform=win32 --arch=x64  --icon=assets/win/logo.png --ignore=dist --ignore=assets --ignore=build --ignore=bin --ignore=README.md --ignore=.gitignore --ignore=samples",
     "build": "npm run build:osx && npm run build:win",
-    "build:osx": "npm run pack:osx && electron-builder \"dist/osx/skylarker-darwin-x64/skylarker.app\" --platform=osx --out=\"installer/osx\" ",
-    "build:win": "npm run pack:win && electron-builder \"dist/win/skylarker-win32-ia32\" --platform=win  --dir=false "
+    "build:osx": "cd .. && electron-builder  --platform=osx  \" ",
+    "build:win": "cd .. && electron-builder  --platform=win  \" "
   },
 
   "build": {

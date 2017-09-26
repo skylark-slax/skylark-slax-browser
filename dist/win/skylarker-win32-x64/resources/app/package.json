@@ -1,0 +1,25 @@
+{
+  "name": "skylark-browser",
+  "productName": "skylarker",
+  "version": "0.9.0",
+  "description": "The desktop browser for skylark applicaton",
+  "main": "main.js",
+  "bin": {
+    "sbrowse": "./bin/cli.js"
+  },
+  "repository": "https://github.com/skylarkjs/skylark-brower.git",
+  "keywords": [
+    "skylarker",
+    "desktop"
+  ],
+  "author": "hudaokeji",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.7.6"
+  },
+  "dependencies": {
+    "asar": "^0.13.0",
+    "commander": "^2.11.0",
+    "spawn-async": "0.0.1"
+  }
+}

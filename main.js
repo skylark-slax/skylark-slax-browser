@@ -39,23 +39,25 @@ let exeFileName,
     mainWindow;
 
 slarAppFileName = process.argv[1];
-if (slarAppFileName.indexOf("main.js")> -1) {
-    slarAppFileName = process.argv[2];
+if (slarAppFileName) {
+    if (slarAppFileName.indexOf("main.js")> -1) {
+        slarAppFileName = process.argv[2];
+    }
 }
-console.log("slarAppFileName:" + slarAppFileName);
-
-
-exeFileName = process.argv[0];
-console.log("exeFileName:" + exeFileName);
-
+//console.log("slarAppFileName:" + slarAppFileName);
 if (!slarAppFileName) {
     dialog.showErrorBox("Error","Please specify a skylark application!");
     app.quit();
     return ;
 }
 
+
+exeFileName = process.argv[0];
+//console.log("exeFileName:" + exeFileName);
+
+
 slarAppFileExt = path.extname(slarAppFileName);
-console.log("slarAppFileExt:" + slarAppFileExt);
+//console.log("slarAppFileExt:" + slarAppFileExt);
 if (slarAppFileExt !== ".slax") {
     dialog.showErrorBox("Error","The skylark application file extension should be .slax!");
     app.quit();
@@ -63,7 +65,7 @@ if (slarAppFileExt !== ".slax") {
 }
 
 slarAppName = path.parse(slarAppFileName).name;
-console.log("slarAppName:" + slarAppName);
+//console.log("slarAppName:" + slarAppName);
 
 slarAppDir = path.resolve(path.dirname(exeFileName)+"/.cache/apps/" + slarAppName);
 //console.log("slarAppDir:" + slarAppDir);
