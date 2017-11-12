@@ -1,4 +1,5 @@
 const asar = require("asar");
+const zipper  = require("zip-local");
 const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
@@ -12,21 +13,29 @@ const dialog = electron.dialog;
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
+const del = require('del');
 
 //slax.wrapFsWithAsar(require('fs'));
 
-var deleteFolderRecursive = function(path) {
-  if (fs.existsSync(path)) {
-    fs.readdirSync(path).forEach(function(file, index){
-      var curPath = path + "/" + file;
-      if (fs.lstatSync(curPath).isDirectory()) { // recurse
-        deleteFolderRecursive(curPath);
-      } else { // delete file
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(path);
-  }
+var extractSlaxFile = function(slaxFileName,slaxAppDir) {
+    function ensureAppDir() {
+        if (fs.existsSync(slaxAppDir)) {
+            del.sync([slaxAppDir + '/**/*'], {
+                force: true
+            });       
+            fs.rmdirSync(slaxAppDir);
+        }
+        fs.mkdirSync(slaxAppDir);
+    }
+
+    try {
+        ensureAppDir();
+        zipper.sync.unzip(slaxFileName).save(slaxAppDir);
+    } catch (e) {
+        console.log("The slax file is not a zipped file? extract as a asar file");
+        ensureAppDir();
+        asar.extractAll(slaxFileName,slaxAppDir);
+    }
 };
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -70,9 +79,7 @@ slarAppName = path.parse(slarAppFileName).name;
 slarAppDir = path.resolve(path.dirname(exeFileName)+"/.cache/apps/" + slarAppName);
 //console.log("slarAppDir:" + slarAppDir);
 
-deleteFolderRecursive(slarAppDir);
-
-asar.extractAll(path.resolve(slarAppFileName),slarAppDir);
+extractSlaxFile(path.resolve(slarAppFileName),slarAppDir);
 
 function createWindow() {
     // Create the browser window.
