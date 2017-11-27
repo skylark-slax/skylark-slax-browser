@@ -1,7 +1,7 @@
 {
   "name": "skylark-slax-browser",
   "productName": "skylarker",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "The desktop browser for skylark applicaton",
   "main": "main.js",
   "scripts": {
