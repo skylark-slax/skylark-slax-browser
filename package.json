@@ -1,13 +1,13 @@
 {
   "name": "skylark-slax-browser",
   "productName": "skylarker",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "The desktop browser for skylark applicaton",
   "main": "main.js",
   "scripts": {
     "start": "electron ./main.js"
   },
-  "repository": "https://github.com/skylarkjs/skylark-brower.git",
+  "repository": "https://github.com/skylarkjs/skylark-slax-browser.git",
   "keywords": [
     "skylarker",
     "desktop"
